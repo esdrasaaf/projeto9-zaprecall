@@ -13,6 +13,11 @@ export default function Welcome () {
         <LoginPage stateDisplay={display}>
             <img src={logo} alt="Logo do ZapRecall"/>
             <span>ZapRecall</span>
+            <select name="select">
+                <option value="valor1" selected>React Deck</option>
+                <option value="valor2">Harry Potter Deck</option>
+                <option value="valor3">Games Deck</option>
+            </select>
             <button onClick={startRecall}>Iniciar Recall!</button>
         </LoginPage>
     )
@@ -46,7 +51,15 @@ const LoginPage = styled.div`
     img {
         width: 136px;
         height: 161px;
-        margin-bottom: 15px;
+        margin-bottom: 25px;
+    }
+
+    select {
+        width: 246px;
+        height: 43px;
+        background: #FFFFFF;
+        border-radius: 5px;
+        margin-bottom: 18px;
     }
 
     button {

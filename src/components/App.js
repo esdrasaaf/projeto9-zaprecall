@@ -9,6 +9,7 @@ import GlobalStyle from "./globalStyles";
 
 export default function App () {
     const [finishedLetters, setFinishedLetters] = useState(0)
+    const [finishedIcons, setFinishedIcons] = useState([])
 
     return (
         <>
@@ -25,11 +26,13 @@ export default function App () {
                             index={index}
                             key={index}
                             finishedLetters={finishedLetters}
-                            setFinishedLetters={setFinishedLetters}/>
+                            setFinishedLetters={setFinishedLetters}
+                            finishedIcons={finishedIcons}
+                            setFinishedIcons={setFinishedIcons}/>
                     )}
                 </MidContent>
 
-                <Footer number={finishedLetters}/>
+                <Footer number={finishedLetters} icons={finishedIcons}/>
             </Content>
         </>
     )
@@ -43,12 +46,12 @@ const Content = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 `
 const MidContent = styled.ul`
     width: 375px;
-    max-height: 400px;
+    //Colocar isso no media query pra celular (talvez) max-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -15,7 +15,9 @@ const LogoContent = styled.div `
     align-items: center;
     justify-content: center;
     height: 153px;
-    width: 375px;
+    width: 100%;
+    border-bottom: 1px solid #DC143C;
+    flex-shrink: 0;
 
     img {
         height: 60px;

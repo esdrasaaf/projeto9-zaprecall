@@ -1,12 +1,15 @@
 import { useState } from "react"
 import styled from "styled-components"
 import playIcon from "../assets/img/play-outline-icon.svg"
-import turnIcon from "../assets/img/setinha.png"
+import turnIcon from "../assets/img/seta_virar.png"
 import checkIcon from "../assets/img/checkmark-circle-icon.svg"
 import helpIcon from "../assets/img/help-circle-icon.svg"
 import closeIcon from "../assets/img/close-circle-icon.svg"
+import errorIcon from "../assets/img/icone_erro.png"
+import almostIcon from "../assets/img/icone_quase.png"
+import zapIcon from "../assets/img/icone_certo.png"
 
-export default function Deck ({object, index, finishedLetters, setFinishedLetters}) {
+export default function Deck ({object, index, finishedLetters, setFinishedLetters, finishedIcons, setFinishedIcons}) {
     const [cardImg, setCardImg] = useState ()
     const [classCard, setClassCard] = useState ("")
     const [clickedFlashcards, setClickedFlashcards] = useState ([])
@@ -14,8 +17,10 @@ export default function Deck ({object, index, finishedLetters, setFinishedLetter
     const [finishedCards, setFinishedCards] = useState([])
 
     function showQuestion (index) {
-        if (!clickedFlashcards.includes(index)) {
-            setClickedFlashcards([...clickedFlashcards, index])
+        if (!finishedCards.includes(index)) {
+            if (!clickedFlashcards.includes(index)) {
+                setClickedFlashcards([...clickedFlashcards, index])
+            }
         }
     }
 
@@ -39,6 +44,7 @@ export default function Deck ({object, index, finishedLetters, setFinishedLetter
         setCardImg(closeIcon)
         setClassCard("errorResult")
         setFinishedLetters(finishedLetters + 1)
+        setFinishedIcons([...finishedIcons, errorIcon])
     }
 
     function almostClick (index) {
@@ -51,6 +57,7 @@ export default function Deck ({object, index, finishedLetters, setFinishedLetter
         setCardImg(helpIcon)
         setClassCard("almostResult")
         setFinishedLetters(finishedLetters + 1)
+        setFinishedIcons([...finishedIcons, almostIcon])
     }
 
     function zapClick (index) {
@@ -63,6 +70,7 @@ export default function Deck ({object, index, finishedLetters, setFinishedLetter
         setCardImg(checkIcon)
         setClassCard("zapResult")
         setFinishedLetters(finishedLetters + 1)
+        setFinishedIcons([...finishedIcons, zapIcon])
     }
 
     return (
