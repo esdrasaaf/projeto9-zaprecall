@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styled from "styled-components"
 import playIcon from "../assets/img/play-outline-icon.svg"
-import turnIcon from "../assets/img/seta_virar.png"
+import turnIcon from "../assets/img/setinha.png"
 import checkIcon from "../assets/img/checkmark-circle-icon.svg"
 import helpIcon from "../assets/img/help-circle-icon.svg"
 import closeIcon from "../assets/img/close-circle-icon.svg"
@@ -44,7 +44,8 @@ export default function Deck ({object, index, finishedLetters, setFinishedLetter
         setCardImg(closeIcon)
         setClassCard("errorResult")
         setFinishedLetters(finishedLetters + 1)
-        setFinishedIcons([...finishedIcons, errorIcon])
+        finishedIcons[index] = errorIcon
+        setFinishedIcons(finishedIcons)
     }
 
     function almostClick (index) {
@@ -57,7 +58,8 @@ export default function Deck ({object, index, finishedLetters, setFinishedLetter
         setCardImg(helpIcon)
         setClassCard("almostResult")
         setFinishedLetters(finishedLetters + 1)
-        setFinishedIcons([...finishedIcons, almostIcon])
+        finishedIcons[index] = almostIcon
+        setFinishedIcons(finishedIcons)
     }
 
     function zapClick (index) {
@@ -70,7 +72,8 @@ export default function Deck ({object, index, finishedLetters, setFinishedLetter
         setCardImg(checkIcon)
         setClassCard("zapResult")
         setFinishedLetters(finishedLetters + 1)
-        setFinishedIcons([...finishedIcons, zapIcon])
+        finishedIcons[index] = zapIcon
+        setFinishedIcons(finishedIcons)
     }
 
     return (

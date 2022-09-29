@@ -4,18 +4,20 @@ import LoginPage from "./Welcome"
 import Header from "./Header";
 import Deck from "./Deck";
 import Footer from "./Footer";
-import deckSelected from "./decks"
+import arrayDecks from "./decks"
 import GlobalStyle from "./globalStyles";
 
 export default function App () {
     const [finishedLetters, setFinishedLetters] = useState(0)
-    const [finishedIcons, setFinishedIcons] = useState([])
+    const [deckIndex, setDeckIndex] = useState(0)
+    let deckSelected = arrayDecks[deckIndex]    
+    const [finishedIcons, setFinishedIcons] = useState(Array(deckSelected.length).fill(""))
 
     return (
         <>
             <GlobalStyle/>
             <Content>
-                <LoginPage/>
+                <LoginPage setDeckIndex={setDeckIndex}/>
 
                 <Header/>
 
@@ -32,7 +34,7 @@ export default function App () {
                     )}
                 </MidContent>
 
-                <Footer number={finishedLetters} icons={finishedIcons}/>
+                <Footer number={finishedLetters} icons={finishedIcons} deckSelected={deckSelected}/>
             </Content>
         </>
     )
