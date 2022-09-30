@@ -103,6 +103,8 @@ export default function Flashcards ({object, index, finishedLetters, setFinished
 
 //Styled Components//
 const FlashcardContent = styled.li `
+    font-family: 'Recursive', sans-serif;
+    
     .hide {
         display: none;
     }
