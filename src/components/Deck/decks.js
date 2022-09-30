@@ -1,4 +1,4 @@
-const deck = [
+const decks = [
     //Deck do React
     [
         {Q: "O que é JSX?", R: "Uma extensão de linguagem do JavaScript"},
@@ -13,7 +13,7 @@ const deck = [
         {Q: "Usamos estado (state) para __", R: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"}
     ],
 
-    //Deck do Percy Jackson
+    //Deck do Percy Jackson ft. Juão
     [
         {Q: "Quem é o pai do Percy Jackson?", R: "Poseidon"},
         {Q: "O que é roubado no primeiro livro?", R: "O raio de Zeus"},
@@ -41,7 +41,7 @@ const deck = [
         {Q: "O que deve ser dito ao usar/ao fechar o Mapa do Maroto?", R: '"Juro solenemente que não farei o bem" e "Malfeito feito"'}
     ],
 
-    //Deck de pokémon
+    //Deck de Pokémon
     [
         {Q: "Qual é a evolução do pikachu?", R: "Raichu"},
         {Q: "Quantos pokémons conseguem mega-evoluir para X e Y?", R: "Charizard e Mewtwo"},
@@ -66,7 +66,7 @@ const deck = [
         {Q: "Bônus: Quem deitou o Zeus na porrada", R: "Kratos, O bom de guerra!"}
     ],
 
-    //Deck LOL
+    //Deck LOL ft. Pedrola
     [
         {Q: "Quem é o irmão do Yasuo?", R: "Yone"},
         {Q: "Jinx e de Quê? ", R: " de Jinx"},
@@ -79,4 +79,4 @@ const deck = [
     ]
 ]
 
-export default deck 
+export default decks

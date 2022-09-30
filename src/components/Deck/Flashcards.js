@@ -1,15 +1,15 @@
 import { useState } from "react"
 import styled from "styled-components"
-import playIcon from "../assets/img/play-outline-icon.svg"
-import turnIcon from "../assets/img/setinha.png"
-import checkIcon from "../assets/img/checkmark-circle-icon.svg"
-import helpIcon from "../assets/img/help-circle-icon.svg"
-import closeIcon from "../assets/img/close-circle-icon.svg"
-import errorIcon from "../assets/img/icone_erro.png"
-import almostIcon from "../assets/img/icone_quase.png"
-import zapIcon from "../assets/img/icone_certo.png"
+import playIcon from "../../assets/img/play-outline-icon.svg"
+import turnIcon from "../../assets/img/setinha.png"
+import checkIcon from "../../assets/img/checkmark-circle-icon.svg"
+import helpIcon from "../../assets/img/help-circle-icon.svg"
+import closeIcon from "../../assets/img/close-circle-icon.svg"
+import errorIcon from "../../assets/img/icone_erro.png"
+import almostIcon from "../../assets/img/icone_quase.png"
+import zapIcon from "../../assets/img/icone_certo.png"
 
-export default function Deck ({object, index, finishedLetters, setFinishedLetters, finishedIcons, setFinishedIcons}) {
+export default function Flashcards ({object, index, finishedLetters, setFinishedLetters, finishedIcons, setFinishedIcons, counterZap, setCounterZap}) {
     const [cardImg, setCardImg] = useState ()
     const [classCard, setClassCard] = useState ("")
     const [clickedFlashcards, setClickedFlashcards] = useState ([])
@@ -74,36 +74,35 @@ export default function Deck ({object, index, finishedLetters, setFinishedLetter
         setFinishedLetters(finishedLetters + 1)
         finishedIcons[index] = zapIcon
         setFinishedIcons(finishedIcons)
+        setCounterZap(counterZap + 1)
     }
 
     return (
-        <DeckContent> 
-            <li key={index}>
-                <div className={clickedFlashcards.includes(index) ? "hide": "flashcard"}> 
-                    <span className={classCard}>Pergunta {index + 1}</span>
-                    <img className={classCard} src={finishedCards.includes(index) ? cardImg : playIcon} onClick={() => showQuestion(index)} alt="Icone do ZapRecall"/>
+        <FlashcardContent key={index}> 
+                <div data-identifier="flashcard" className={clickedFlashcards.includes(index) ? "hide": "flashcard"}> 
+                    <span data-identifier="flashcard-index-item" className={classCard}>Pergunta {index + 1}</span>
+                    <img data-identifier="flashcard-show-btn" className={classCard} src={finishedCards.includes(index) ? cardImg : playIcon} onClick={() => showQuestion(index)} alt="Icone do ZapRecall"/>
                 </div>
 
                 <div className={clickedFlashcards.includes(index) && !turnedQuestions.includes(index) ? 'question' : 'hide'}> 
-                    <span>{object.Q}</span>
-                    <img src={turnIcon} onClick={() => turnFlashcard(index)} alt="Icone do ZapRecall"/>
+                    <span data-identifier="flashcard-question">{object.Q}</span>
+                    <img data-identifier="flashcard-turn-btn" src={turnIcon} onClick={() => turnFlashcard(index)} alt="Icone do ZapRecall"/>
                 </div>
 
                 <div className={turnedQuestions.includes(index) ? 'answer' : 'hide'} > 
-                    <span>{object.R}</span>
+                    <span data-identifier="flashcard-answer">{object.R}</span>
                     <AnswersContent>
-                        <button className="error" onClick={() => errorClick(index)}>Não Lembrei</button>
-                        <button className="almost" onClick={() => almostClick(index)}>Quase não lembrei</button>
-                        <button className="zap" onClick={() => zapClick(index)}>Zap!</button>
+                        <button data-identifier="forgot-btn" className="error" onClick={() => errorClick(index)}>Não Lembrei</button>
+                        <button data-identifier="almost-forgot-btn" className="almost" onClick={() => almostClick(index)}>Quase não lembrei</button>
+                        <button  data-identifier="zap-btn" className="zap" onClick={() => zapClick(index)}>Zap!</button>
                     </AnswersContent>
                 </div>
-            </li>
-        </DeckContent>
+        </FlashcardContent>
     )
 }
 
 //Styled Components//
-const DeckContent = styled.ul `
+const FlashcardContent = styled.li `
     .hide {
         display: none;
     }

@@ -1,40 +1,69 @@
 import styled from "styled-components";
 import { useState } from "react";
-import LoginPage from "./Welcome"
-import Header from "./Header";
-import Deck from "./Deck";
-import Footer from "./Footer";
-import arrayDecks from "./decks"
+import HomePage from "./HomePage/Welcome"
+import Header from "./Header/Header";
+import Flashcard from "./Deck/Flashcards";
+import MetaResult from "./MetaResult/MetaResult";
+import Footer from "./Footer/Footer";
+import arrayDecks from "./Deck/decks"
 import GlobalStyle from "./globalStyles";
+import happy from "../assets/img/party.png"
+import sad from "../assets/img/sad.png"
+
 
 export default function App () {
     const [finishedLetters, setFinishedLetters] = useState(0)
     const [deckIndex, setDeckIndex] = useState(0)
     let deckSelected = arrayDecks[deckIndex]    
     const [finishedIcons, setFinishedIcons] = useState(Array(deckSelected.length).fill(""))
+    const [counterZap, setCounterZap] = useState(0)
+    const [metaZap, setMetaZap] = useState(0)
+    const [deckDisplay, setDeckDisplay] = useState ("flex")
+    const [resultDisplay, setResultDisplay] = useState("none")
+    const [resultImg, setResultImg] = useState()
+    const [resultText, setResultText] = useState('')
+
+    function showMetaResult () {
+        if (finishedLetters === deckSelected.length){
+            setDeckDisplay("none")
+            if (counterZap >= metaZap) {
+                setResultDisplay("flex")
+                setResultImg(happy)
+                setResultText("Parabéns, você atingiu sua meta de Zaps!")
+            } else if (counterZap < metaZap) {
+                setResultDisplay("flex")
+                setResultImg(sad)
+                setResultText("Que pena!, você não atingiu sua meta de Zaps!")
+            }
+        }
+    }
 
     return (
         <>
             <GlobalStyle/>
             <Content>
-                <LoginPage setDeckIndex={setDeckIndex}/>
+                <HomePage setDeckIndex={setDeckIndex} setMetaZap={setMetaZap} deckSelected={deckSelected}/>
 
                 <Header/>
 
-                <MidContent>
+                <DeckContent deckDisplay={deckDisplay}>
                     {deckSelected.map((object, index) => 
-                        <Deck 
+                        <Flashcard 
                             object={object} 
                             index={index}
                             key={index}
                             finishedLetters={finishedLetters}
                             setFinishedLetters={setFinishedLetters}
                             finishedIcons={finishedIcons}
-                            setFinishedIcons={setFinishedIcons}/>
+                            setFinishedIcons={setFinishedIcons}
+                            counterZap={counterZap}
+                            setCounterZap={setCounterZap}/>        
                     )}
-                </MidContent>
+                </DeckContent>
 
-                <Footer number={finishedLetters} icons={finishedIcons} deckSelected={deckSelected}/>
+                <MetaResult resultImg={resultImg} resultText={resultText} resultDisplay={resultDisplay}/>
+
+                <Footer showMetaResult={showMetaResult} number={finishedLetters} icons={finishedIcons} deckSelected={deckSelected}/>
             </Content>
         </>
     )
@@ -51,10 +80,9 @@ const Content = styled.div`
     justify-content: space-between;
     align-items: center;
 `
-const MidContent = styled.ul`
+const DeckContent = styled.ul`
     width: 375px;
-    //Colocar isso no media query pra celular (talvez) max-height: 400px;
-    display: flex;
+    display: ${props => props.deckDisplay};
     flex-direction: column;
     align-items: center;
     overflow-y: auto;

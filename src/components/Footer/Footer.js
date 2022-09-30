@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
-export default function Footer(props) {
+export default function Footer({number, deckSelected, icons, showMetaResult}) {
+  if (number === deckSelected.length) {
+    showMetaResult()
+  }
+
   return (
     <ScoreContent>
-      <span>
-        {props.number}/{props.deckSelected.length} CONCLUÍDOS
+      <span data-identifier="flashcard-counter">
+        {number}/{deckSelected.length} CONCLUÍDOS
       </span>
 
       <ScoreIcons>
-        {props.icons.map((icon, index) => (
+        {icons.map((icon, index) => (
           <li key={index}>
             {icon === "" ? "" : <img src={icon} alt="Ícone do Flashcard" />}
           </li>

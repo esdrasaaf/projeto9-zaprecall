@@ -1,9 +1,9 @@
 import { useState } from "react"
 import styled from "styled-components"
-import logo from "../assets/img/logoboa.png"
+import logo from "../../assets/img/logoboa.png"
 import SelectDeck from "./SelectDeck"
 
-export default function Welcome ({setDeckIndex}) {
+export default function Welcome ({setDeckIndex, setMetaZap, deckSelected}) {
     const [display, setDisplay] = useState ('flex')
 
     function startRecall () {
@@ -14,8 +14,8 @@ export default function Welcome ({setDeckIndex}) {
         <LoginPage stateDisplay={display}>
             <img src={logo} alt="Logo do ZapRecall"/>
             <span>ZapRecall</span>
-            <SelectDeck setDeckIdx={setDeckIndex}/>
-            <button onClick={startRecall}>Iniciar Recall!</button>
+            <SelectDeck setDeckIdx={setDeckIndex} setMetaZap={setMetaZap} deckSelected={deckSelected}/>
+            <button data-identifier="start-btn" onClick={startRecall}>Iniciar Recall!</button>
         </LoginPage>
     )
 }
